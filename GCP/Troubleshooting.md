@@ -8,3 +8,7 @@ kubectl expose deployment nginx --port=80 --type=LoadBalancer
 ```
 Error from server (NotFound): deployments.extensions "nginx" not found
 ```
+* Resolved
+```
+kubectl expose pod nginx --port=80 --type=LoadBalancer
+```

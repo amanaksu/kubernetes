@@ -91,8 +91,8 @@ kubectl create -f https://raw.githubusercontent.com/cilium/cilium/v1.6/install/k
 # Weave Net
 kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
 ```
-* Contiv-VPP : [매뉴얼 참고](4)
-* Kube-Route : [매뉴얼 참고](5)
+* Contiv-VPP : [매뉴얼 참고][4]
+* Kube-Route : [매뉴얼 참고][5]
 
 ### 7. Check Node Status
 ```
@@ -129,9 +129,9 @@ kubeadm reset       # 초기화
 
 
 ### 99. Reference
-* [Why disable swap on kubernetes](1)
-* [Install Kubeadm](2)
-* [Create Cluster Kubeadm](3)
+* [Why disable swap on kubernetes][1]
+* [Install Kubeadm][2]
+* [Create Cluster Kubeadm][3]
 
 [1]: https://serverfault.com/question/881517/why-disable-swap-on-kubernetes
 [2]: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/

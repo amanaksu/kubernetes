@@ -1,7 +1,7 @@
 ## Kubernetes using GCP
 
 ### 1. sign up GCP
-* sign up : [Google Cloud Platform](1)
+* sign up : [Google Cloud Platform][1]
 
 ### 2. Create Project
 * (Optional) Change Region.
@@ -21,12 +21,9 @@
     ```
     kubectl expose deployment nginx --port=80 --type=LoadBalancer
     ```
-    * Error : [Error from server (NotFound): deployments.extensions "nginx" not found](2)
+    * Error : [Error from server (NotFound): deployments.extensions "nginx" not found][2]
 
     5) Check Started nginx service in "Service & Response" Tab
-
-
-
 
 
 

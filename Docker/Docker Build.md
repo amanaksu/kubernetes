@@ -5,12 +5,12 @@
 
 ### 2. Build Image
 * sudo docker budil -t < Tag Name > < dockerfile Path >
-```
-sudo docker build -t echo_test .
-```
+    ```
+    sudo docker build -t echo_test .
+    ```
 
 ### 3. Start Docker Image
 * 정상 연결을 확인하기 위해 -t (Termianl) 옵션을 부여함
-```
-sudo docker run --rm -t -p 12345:12345 --name echo echo_test
-```
+    ```
+    sudo docker run --rm -t -p 12345:12345 --name echo echo_test
+    ```

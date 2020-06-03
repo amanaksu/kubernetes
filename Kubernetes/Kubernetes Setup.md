@@ -5,7 +5,7 @@
 * kubelet : 클러스터의 모든 시스템에서 실행되는 구성 요소로 창 및 컨테이너 시작 작업을 수행 (서비스)
 * kubectl : 클러스터와 통신하는 사용자 클라이언트 프로그램
 
-### 1. Install Kubernetes (Master Node)
+### 1. Install Kubernetes (Common)
 * 설치명령들을 Shell Script 에 저장해서 실행하면 된다. 
 ```
 sudo apt-get update && sudo apt-get install -y apt-transport-https curl
@@ -26,32 +26,28 @@ sudo apt-mark hold kubelet kubeadm kubectl
 sudo hostnamectl set-hostname master
 ```
 
-
-### 2. Initialize Master Node (Master Node)
-1) Master Node 초기화를 가장 먼저 수행
-```
-sudo kubeadm init
-```
-
-2) Swap 에러 발생시 Swap 기능 제거
-```
-sudo swapoff -a                                    # 현재 커널에서 Swap 기능 끄기
-sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab # Reboot 후에도 Swap 기능 유지
-reboot                                             # 적용
-                                                   # 재부팅 후
-sudo kubeadm init                                  # 초기화 진행
-```
-
-- Kubernetes 에서 Swap 비활성화하는 이유
+### 2. Disable SWAP
+* Kubernetes 에서 Swap 비활성화하는 이유
     - Kubernetes 1.8 이후 Node 에서 Swap을 비활성화해야 설치가 가능함 (or --fail-swap-on = false)
     - Kubernetes 아이디어는 인스턴스를 최대한 100% 에 가깝게 성능을 발휘하는 것
     - 모든 배포는 CPU / Memory 제한을 고정하는 것이 필요
     - 스케줄러가 Pod를 머신에 보내면 Swap 을 사용하지 않는 것이 필요
     - Swap 발생시 속도가 느려지는 이슈 발생
     - 성능을 위한 것
+    ```
+    sudo swapoff -a                                    # 현재 커널에서 Swap 기능 끄기
+    sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab # Reboot 후에도 Swap 기능 유지
+    reboot                                             # 적용
+    ```
+
+### 3. Initialize Master Node (Master Node)
+1) Master Node 초기화를 가장 먼저 수행
+```
+sudo kubeadm init
+```
 
 
-3) 초기화 성공시 결과 저장
+2) 초기화 성공시 결과 저장
 * Client(kubectl) 을 위한 부분
 ```
 mkdir -p $HOME/.kube
@@ -65,12 +61,16 @@ kubeadm join 192.168.174.130:6443 --token geteqf.ianv3311d46qv747 \
     --discovery-token-ca-cert-hash sha256:1fb133ae4e834f702ba96b7c64910174b0f68d85ddc6eb0d700b1a523b0f5f12
 ```
 
+kubeadm join 192.168.174.130:6443 --token 73eu53.f97nfwbkk5bku80g --discovery-token-ca-cert-hash sha256:4bbf9ea7e02ea8403c1e3c686032510f596b376c45ec7b7b49f4f2cd12563d9a 
+
+
+
 ### 3. Install Kubernetes (Slave Node)
-* Master Node 의 Kubernetes 설치 방법과 동일 (위의 1번 항목)
+* Kubernetes Master Node 설치 방법과 동일 (위의 1, 2번 항목)
 
 
 ### 4. Initalize Slave Node (Slave Node)
-* Master Node 초기화 성공시 출력된 Slave Node 가 Master Node 에 추가되기 위한 명령 사용
+* Master Node 초기화 성공시 출력된 Slave Node 를 Master Node 에 추가하기 위한 명령 사용
 
 
 ### 5. Check Node Status

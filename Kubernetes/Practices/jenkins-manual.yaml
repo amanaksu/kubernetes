@@ -1,0 +1,21 @@
+# 1. 모든 리소스를 삭제한다. 
+#       $ kubectl delete all --all
+# 2. YAML 을 사용하여 도커이미지 jenkins 로 jenkins-manual Pod를 생성한다. 
+#       $ kubecrl create -f jenkins-manual.yaml
+# 3. jenkins Pod에서 curl 명령어로 localhost:8080 접속한다.
+#       $ kubectl exec jenkins-manual -- curl 127.0.0.1:8080
+# 4. jenkins Port 를 8888 로 portforwarding 한다. 
+#       $ kubectl port-forward 8888:8080
+# 5. jenkins-manual 설정을 yaml 로 출력한다. 
+#       $ kubectl get pods jenkins-manual -o yaml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: jenkins-manual
+spec:
+    containers:
+    - name: jenkins-manual
+      image: jenkins
+      ports:
+      - containerPort: 8080

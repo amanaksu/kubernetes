@@ -50,6 +50,24 @@
     $ kubectl delete pod --all
     ```
 
+### 4. [Probe][4]
+* Liveness Probe  = is Live  or restart
+
+    * 컨테이너가 살아있는지 판단하고 다시 시작함
+
+* Readiness Probe = is Ready or Not LoadBalancing
+
+    * Pod 준비상태인지 확인하고 적절하지 않는 경우 로드밸런싱을 하지 않음
+
+* Startup Probe
+    
+    * Application 이 시작될 때까지 기다리며, Liveness Probe / Readiness Probe 기능을 비활성화함
+
+
+
+
+
+
 ### 99. Reference
 * [YAML 생성 참조][1]
 * [Kubectl Cheatsheet][2]
@@ -62,3 +80,4 @@
 [1]:https://kubernetes.io/docs/reference/
 [2]:https://kubernetes.io/docs/reference/kubectl/cheatsheet/
 [3]:https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/
+[4]:https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/

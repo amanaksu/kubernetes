@@ -31,3 +31,25 @@
     # http-go-rv-v2.yaml 수정
     $ kubectl apply -f http-go-rc-v2.yaml
     ```
+
+### 2. ReplicaSet
+* Kubernetes 1.8 에서는 Beta로, 1.9 에서는 정식버전으로 업데이트
+* ReplicationControl 에 비해 더 다양한 표현식 Pod Selector 사용 가능 
+* 특정 Label 이 없거나 해당 Value 와 관계없이 특정 Label Key를 포함하는 Pod를 매치하는지 확인 가능
+    ```
+    # YAML
+    apiVersion: apps/v1beta2
+    kind: ReplicaSet
+    ....
+    spec:
+        ....
+        selector:
+            matchLabels:
+                tier: < some-Tiers >
+            matchExpressions:
+            - key: < Key >
+              operator: < Operator >
+              values:
+              - nodejs
+              .....
+    ```

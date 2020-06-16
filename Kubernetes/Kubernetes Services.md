@@ -131,3 +131,23 @@ User --( Firewall )--> LoadBalancer --> NodePort --(Kube-Proxy)--> Service --> P
           app: http-go
     .....
     ```
+
+* LoadBalancer 생성하는 방법
+
+    * 제약사항
+        * 클라우드 서비스에서 사용 가능
+    * Type : LoadBalancer
+    ```
+    # YAML
+    apiVersion: v1
+    kind: Service
+    metadata:
+        name: http-go-lb
+    spec:
+        type: LoadBalancer
+        ports:
+        - port: 80          # Service Port
+          targetPort: 8080  # Pod Port
+        selector:
+          app: http-go
+    ```

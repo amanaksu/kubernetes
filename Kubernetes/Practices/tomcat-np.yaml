@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tomcat-np
+spec:
+  selector:
+    run: tomcat-np
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+    nodePort: 30002
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: tomcat-lb
+spec:
+  selector:
+    run: tomcat-lb
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tomcat-np
+  labels:
+    run: tomcat-np
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: tomcat-np
+  template:
+    metadata:
+      labels:
+        run: tomcat-np
+    spec:
+      containers:
+      - name: tomcat-np
+        image: tomcat
+        ports:
+        - containerPort: 8080

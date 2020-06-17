@@ -76,7 +76,7 @@
     ...
     ```
 
-* Ingress HTTPS 서비스하는 방법
+* Ingress 로 HTTPS 서비스하는 방법
 
     * TLS 인증서 생성 
     ```
